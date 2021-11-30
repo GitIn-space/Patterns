@@ -1,56 +1,42 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace FG
 {
-    public class Uimanager : MonoBehaviour
+    public class Uimanager
     {
-        [SerializeField] Text text;
-        private void OnNavigation(InputValue input)
+        private static Uimanager instance;
+        private Menu textfield;
+        public static Uimanager Instance
         {
-            if(input.Get<Vector2>() == new Vector2(0, 1))
+            get
             {
-                string newtext = "";
-                foreach (Uienum.UIBase each in Enum.GetValues(typeof(Uienum.UIBuildings)))
-                    newtext += each.ToString() + ',';
-
-                string[] split = newtext.Split(',');
-                int c = 0;
-                newtext = "";
-                foreach (Uienum.Keys each in Enum.GetValues(typeof(Uienum.Keys)))
-                {
-                    newtext += each.ToString() + ": " + split[c] + "\n";
-                    c++;
-                    if (c >= split.Length - 1)
-                        break;
-                }
-
-                text.text = newtext;
+                if(instance == null)
+                    instance = new Uimanager();
+                return instance;
             }
         }
 
-        private void Awake()
+        private Uimanager()
         {
-            string newtext = "";
-            foreach (Uienum.UIBase each in Enum.GetValues(typeof(Uienum.UIBase)))
-                newtext += each.ToString() + ',';
+            textfield = GameObject.Find("Canvas").GetComponentInChildren<Menu>();
+        }
 
-            string[] split = newtext.Split(',');
-            int c = 0;
-            newtext = "";
-            foreach(Uienum.Keys each in Enum.GetValues(typeof(Uienum.Keys)))
+        public void OnNavigation(int input)
+        {
+            if (input == -1)
+                return;
+
+            textfield.gameObject.SetActive(false);
+            try
             {
-                newtext += each.ToString() + ": " + split[c] + "\n";
-                c++;
-                if (c >= split.Length - 1)
-                    break;
+                textfield = textfield.Getsubmenu(input);
             }
-
-            text.text = newtext;
+            catch(System.Exception e)
+            {
+                Debug.LogError(e);
+            }
+            textfield.gameObject.SetActive(true);
         }
     }
 }

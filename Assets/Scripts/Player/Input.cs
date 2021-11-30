@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace FG
 {
     public class Input : MonoBehaviour
     {
+        [SerializeField] private Text activetext;
         [SerializeField] private float speed = 1;
         [SerializeField] private float rotspeed = 1;
         [SerializeField] private Transform objprefab;
@@ -97,6 +99,25 @@ namespace FG
         private void OnLook(InputValue input)
         {
             objpos = input.Get<Vector2>();
+        }
+
+        private void OnNavigation(InputValue input)
+        {
+            Uimanager.Instance.OnNavigation(Vec2toint(input.Get<Vector2>()));
+        }
+
+        private int Vec2toint(Vector2 input)
+        {
+            if (input == new Vector2(0, 1))
+                return 0;// 'Z';
+            else if (input == new Vector2(0, -1))
+                return 1;// 'X';
+            else if (input == new Vector2(1, 0))
+                return 2;// 'C';
+            else if (input == new Vector2(-1, 0))
+                return 3;// 'V';
+            else
+                return -1;// '.';
         }
     }
 }
