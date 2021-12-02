@@ -8,10 +8,10 @@ namespace FG
     {
         [SerializeField] private Transform[] submenus = new Transform[4];
 
-        public Menu Getsubmenu(int i)
+        public Transform Getsubitem(int i)
         {
             if(i < 5 && i >= 0 && submenus[i] != null)
-                return submenus[i].GetComponent<Menu>();
+                return submenus[i];
             throw new System.Exception();
         }
     }

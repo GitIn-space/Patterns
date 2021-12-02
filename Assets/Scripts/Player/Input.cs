@@ -8,10 +8,8 @@ namespace FG
 {
     public class Input : MonoBehaviour
     {
-        [SerializeField] private Text activetext;
         [SerializeField] private float speed = 1;
         [SerializeField] private float rotspeed = 1;
-        [SerializeField] private Transform objprefab;
         [SerializeField] private float gravityscale;
         [SerializeField] private float blueprintrange = 15f;
 
@@ -22,14 +20,28 @@ namespace FG
         private Camera cam;
         private Vector3 objpos;
         private int floormask;
+        private Transform currentfab;
+
+        public void Toggleghost(Transform gofab)
+        {
+            if (obj != null && gofab == null || currentfab != null && currentfab == gofab)
+            {
+                Destroy(obj.gameObject);
+                currentfab = null;
+            }
+            else if (obj == null && gofab != null)
+            {
+                obj = Instantiate(gofab, transform.position + transform.forward * 4, Quaternion.identity, transform);
+
+                obj.position = transform.position + transform.forward * 4 - Vector3.up * gofab.transform.localScale.y * 0.5f;
+
+                currentfab = gofab;
+            }
+        }
 
         private void Awake()
         {
             body = gameObject.GetComponent<Rigidbody>();
-
-            obj = Instantiate(objprefab, transform.position + transform.forward * 4, Quaternion.identity, transform);
-
-            obj.position = transform.position + transform.forward * 4 - Vector3.up * 0.5f;
 
             cam = Camera.main;
 
@@ -64,7 +76,7 @@ namespace FG
                 RaycastHit info;
                 Physics.Raycast(cam.ScreenPointToRay(objpos), out info, blueprintrange, floormask);
 
-                pos = info.point + Vector3.up * 0.5f;
+                pos = info.point + Vector3.up * obj.transform.localScale.y * 0.5f;
 
                 obj.position = pos;
             }
@@ -104,6 +116,16 @@ namespace FG
         private void OnNavigation(InputValue input)
         {
             Uimanager.Instance.OnNavigation(Vec2toint(input.Get<Vector2>()));
+        }
+
+        private void OnFire(InputValue input)
+        {
+            if (obj != null)
+            {
+                obj.parent = null;
+                obj = null;
+                currentfab = null;
+            }
         }
 
         private int Vec2toint(Vector2 input)

@@ -11,6 +11,9 @@ public class Pathfinder : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        if (goal == null)
+            goal.position = GameObject.Find("Mine").transform.position;
+
         agent.destination = goal.position;
     }
 
