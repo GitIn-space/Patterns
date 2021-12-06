@@ -29,6 +29,11 @@ namespace FG
             factories.Add(fact);
         }
 
+        public void Deregister(Factory fact)
+        {
+            factories.Remove(fact);
+        }
+
         public void Create(Transform gofab)
         {
             if(factories.Count > 0)

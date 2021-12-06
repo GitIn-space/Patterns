@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 namespace FG
 {
@@ -33,6 +32,11 @@ namespace FG
         {
             queue = new List<GameObject>();
             Factorymanager.Instance.Register(this);
+        }
+
+        private void OnDestroy()
+        {
+            Factorymanager.Instance.Deregister(this);
         }
     }
 }

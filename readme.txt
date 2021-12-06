@@ -7,3 +7,4 @@ Singleton - Uimanager, Factorymanager: "Global" access to classes dedicated to m
 Observer - Factorymanager <-> Factory: Newly created Factories register themselves as available to the Factorymanager, which when appropriate activates them to produce new units.
 Factory - Factory: Is given a prefab when activated to create after a certain time has passed, it doesn't matter to it what it's given as long as it's derived from the Unit class.
 Dependency injection - Just about all classes derived from MonoBehaviour: This might be a reach, so feel free to correct this if it's wrong. I read somewhere that the argument could be made that whenever you drag something via the inspector it could be interpreted as dependency injection, since it's a dependency that you inject.
+State machine - Menu: I'll make an argument that it's there but abstracted. The different canvas elements making up the ZXCV menu has the functionality of a FSM if not traditionally implemented.
