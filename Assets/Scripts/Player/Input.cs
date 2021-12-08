@@ -71,14 +71,14 @@ namespace FG
         {
             if (obj != null)
             {
-                Vector3 pos = new Vector3();
+                Vector3 pos = new Vector3(0, 0, -10);
 
-                RaycastHit info;
-                Physics.Raycast(cam.ScreenPointToRay(objpos), out info, blueprintrange, floormask);
+                if (Physics.Raycast(cam.ScreenPointToRay(objpos), out RaycastHit info, blueprintrange, floormask))
+                {
+                    pos = info.point + Vector3.up * obj.transform.localScale.y * 0.5f;
 
-                pos = info.point + Vector3.up * obj.transform.localScale.y * 0.5f;
-
-                obj.position = pos;
+                    obj.position = pos;
+                }
             }
         }
 

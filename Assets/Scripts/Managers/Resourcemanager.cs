@@ -36,17 +36,21 @@ namespace FG
         private void Awake()
         {
             if (instance != null)
-            {
                 Destroy(this.gameObject);
-            }
+            else
+                instance = this;
+        }
+
+        private void Start()
+        {
+            Goldfabricator gf = new Goldfabricator();
+            gf.Setposition(new Vector3(0, 0, 10)).Build();
         }
 
         private void OnDestroy()
         {
             if (instance == this)
-            {
                 instance = null;
-            }
         }
     }
 }
