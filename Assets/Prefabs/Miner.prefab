@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1150234017835578026}
   - component: {fileID: 1150234017835578031}
   - component: {fileID: 1150234017835578069}
-  - component: {fileID: 2195894821093663322}
+  - component: {fileID: 2515827325616889362}
   m_Layer: 0
   m_Name: Miner
   m_TagString: Untagged
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 7527925797367140406, guid: f445e86e2db5a0a4394eab59e1f975c0, type: 3}
---- !u!114 &2195894821093663322
+--- !u!114 &2515827325616889362
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1150234017835578068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7accae70bc713cc49892caaf28d98bf0, type: 3}
+  m_Script: {fileID: 11500000, guid: f3fbbcf5512799b44b5f94fef4d602ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  traintime: 0.1
+  traintime: 1

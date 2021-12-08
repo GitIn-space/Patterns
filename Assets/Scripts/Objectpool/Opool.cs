@@ -6,12 +6,12 @@ namespace FG
 {
     public class Opool<T>
     {
-        createFunc;
+        /*createFunc;
         actionOnGet;
         actionOnRelease;
         actionOnDestroy;
         collectionCheck;
         defaultCapacity;
-        maxSize;
+        maxSize;*/
     }
 }
